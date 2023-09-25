@@ -1,0 +1,51 @@
+@use 'breakpoints' as media;
+@import 'variables';
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: $header-height;
+    padding: 0.5rem 1rem;
+    box-shadow: $box-shadow-nav;
+    color: $color-primary;
+    background-color: white;
+
+    &__logoContainer {
+        margin-left: 1rem;
+        flex: 1;
+
+        a {
+            cursor: pointer;
+        }
+    }
+
+    &__buttonList {
+        display: none;
+    }
+
+    &__burgerButton {
+        padding: 0.5rem;
+        border: none;
+        border-radius: 50%;
+        background: none;
+        color: $color-primary;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+
+        &:hover {
+            background: lighten($color-primary, 20%);
+        }
+    }
+}
+
+@include media.sm {
+    .header__buttonList {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .header__burgerButton {
+        display: none;
+    }
+}

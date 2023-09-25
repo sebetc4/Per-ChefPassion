@@ -1,0 +1,19 @@
+@import 'variables';
+
+.mobileMenu {
+    position: absolute;
+    top: 65px;
+    right: 10px;
+    padding: 1rem;
+
+    li {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        border-radius: 20px;
+        transition: .3s ease;
+        &:hover {
+            background: $color-primary;
+            color: white
+        }
+    }
+}

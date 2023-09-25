@@ -1,0 +1,49 @@
+@import 'variables';
+
+.adminRecipesList {
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    border: $border-1;
+
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: $border-1;
+    }
+
+    &__buttonsContainer {
+        display: flex;
+        gap: 1rem;
+
+        button {
+            border: none;
+            background: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+
+            &:first-child {
+                color: $color-red-1;
+
+                &:hover {
+                    background-color: lighten($color-red-1, 30%);
+                }
+            }
+            &:last-child {
+                color: $color-primary;
+
+                &:hover {
+                    background-color: lighten($color-primary, 30%);
+                }
+            }
+        }
+    }
+    &__loadMoreRecipeButtonContainer {
+        display: flex;
+        justify-content: center;
+        margin: 2rem 0;
+    }
+}

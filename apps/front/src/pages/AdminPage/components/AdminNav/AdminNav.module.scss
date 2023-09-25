@@ -1,0 +1,26 @@
+@import 'variables';
+
+.adminNav {
+    width: 200px;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0 10px 10px 0;
+    border: $border-1;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    a {
+        display: block;
+        padding: 0.5rem;
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+
+        &.active {
+            background-color: $color-primary;
+            color: white;
+        }
+    }
+}

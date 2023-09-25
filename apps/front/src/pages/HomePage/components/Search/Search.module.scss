@@ -1,0 +1,15 @@
+@import 'variables';
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 2px solid $color-gray-2;
+    border-radius: 20px;
+    input {
+        border: none;
+        outline: none;
+    }
+}
