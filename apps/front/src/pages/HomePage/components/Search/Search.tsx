@@ -1,6 +1,6 @@
 // Styles
 import styles from './Search.module.scss';
-// Librairies
+// Libs
 import { AiOutlineSearch } from 'react-icons/ai';
 
 type SearchProps = {

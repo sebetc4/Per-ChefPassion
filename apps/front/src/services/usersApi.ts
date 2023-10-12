@@ -1,4 +1,6 @@
-import { SignupBody } from '~/types';
+// Libs
+import { SigninBody, CreateUserBody } from 'types';
+// Api
 import { Api } from './Api';
 
 class UsersApi extends Api {
@@ -6,11 +8,23 @@ class UsersApi extends Api {
 
     constructor() {
         super();
-        this.baseUrl = '/api/users';
+        this.baseUrl = '/api';
     }
 
-    async signup(body: SignupBody) {
-        return await this.post(this.baseUrl, body);
+    async createUser(body: CreateUserBody) {
+        return await this.post(`${this.baseUrl}/users`, body);
+    }
+
+    async signin(body: SigninBody) {
+        return await this.post(`${this.baseUrl}/auth`, body);
+    }
+
+    async getCurrentUser() {
+        return await this.get(`${this.baseUrl}/auth`);
+    }
+
+    async signout() {
+        return await this.delete(`${this.baseUrl}/auth`);
     }
 }
 

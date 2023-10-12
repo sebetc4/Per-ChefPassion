@@ -1,6 +1,6 @@
 // Styles
 import styles from './Loader.module.scss';
-// Librairies
+// Libs
 import {BiLoaderCircle} from 'react-icons/bi';
 
 export const Loader = () => {

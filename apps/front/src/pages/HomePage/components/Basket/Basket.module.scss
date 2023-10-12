@@ -1,0 +1,51 @@
+@import 'variables';
+@import 'animations';
+
+.container {
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    z-index: 1;
+
+    &.enter {
+        animation: enter .3s ease-in-out;
+    }
+    &.exit {
+        animation: leave .3s ease-in-out;
+    }
+}
+
+.basket {
+    width: 400px;
+    height: 400px;
+    margin: 2rem;
+    background-color: white;
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: $box-shadow;
+    border: $border-1;
+    overflow-y: auto;
+    animation: fade-in .3s ease-in-out;
+
+    &__list {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: $color-red-1
+        }
+    }
+}

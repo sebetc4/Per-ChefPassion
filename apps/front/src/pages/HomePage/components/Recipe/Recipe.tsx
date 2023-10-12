@@ -1,13 +1,13 @@
 // Styles
-import { MouseEvent } from 'react';
 import styles from './Recipe.module.scss';
-// App
+// Libs
+import  { MouseEvent } from 'react';
+import { Recipe as TRecipe } from 'types';
 import { AiFillHeart, AiOutlineClose } from 'react-icons/ai';
-import { Recipe as RecipeType } from '~/types';
 
 type RecipeProps = {
-    recipe: RecipeType;
-    updateRecipe: (updatedRecipe: RecipeType) => void;
+    recipe: TRecipe;
+    updateRecipe: (updatedRecipe: TRecipe) => void;
     deleteRecipe: (_id: string) => void;
 };
 

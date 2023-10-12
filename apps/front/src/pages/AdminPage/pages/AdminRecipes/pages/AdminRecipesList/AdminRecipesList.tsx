@@ -1,12 +1,14 @@
 // Styles
 import styles from './AdminRecipesList.module.scss';
-// Librairies
+// Libs
 import { useState } from 'react';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 // App
 import { useFetchRecipes } from '~/hooks';
 import { recipesApi } from '~/services';
+import { recipesState } from '~/state';
 import { Path } from '~/types';
 
 export default function AdminRecipesList() {
@@ -14,12 +16,13 @@ export default function AdminRecipesList() {
 
     const [page, setPage] = useState(1);
 
-    const { allRecipes, setAllRecipes } = useFetchRecipes(page, 'admin');
+    useFetchRecipes(page, 'admin');
+    const [recipes, setRecipes] = useRecoilState(recipesState);
 
     const deleteRecipe = async (_id: string) => {
         try {
             await recipesApi.deleteRecipe(_id);
-            setAllRecipes(allRecipes.filter((recipe) => recipe._id !== _id));
+            setRecipes((state) => state.filter((recipe) => recipe._id !== _id));
         } catch (err) {
             console.log(err);
         }
@@ -28,7 +31,7 @@ export default function AdminRecipesList() {
     return (
         <>
             <ul className={styles.adminRecipesList}>
-                {allRecipes.map((recipe) => (
+                {recipes.map((recipe) => (
                     <li key={recipe._id}>
                         <p>{recipe.title}</p>
                         <div className={styles.adminRecipesList__buttonsContainer}>

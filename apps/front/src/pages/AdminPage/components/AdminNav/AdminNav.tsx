@@ -1,6 +1,6 @@
 // Styles
 import styles from './AdminNav.module.scss';
-// Librairies
+// Libs
 import { NavLink } from "react-router-dom"
 // App
 import { Path } from "~/types"

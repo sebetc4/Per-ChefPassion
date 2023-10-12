@@ -38,22 +38,24 @@
     }
 }
 
+
+
 @include media.sm {
-    .homePage__grid {
+    .home__grid {
         grid-template-columns: 350px;
         grid-auto-columns: 350px;
     }
 }
 
 @include media.md {
-    .homePage__grid {
+    .home__grid {
         grid-template-columns: repeat(2, 350px);
         grid-auto-columns: repeat(2, 350px);
     }
 }
 
 @include media.xl {
-    .homePage__grid {
+    .home__grid {
         grid-template-columns: repeat(3, 350px);
         grid-auto-columns: repeat(3, 350px);
     }

@@ -1,4 +1,6 @@
-import { CreateRecipeBody, Recipe } from '~/types';
+// Libs
+import { CreateUpdateRecipeBody, Recipe } from 'types';
+// App
 import { Api } from './Api';
 
 class RecipesApi extends Api {
@@ -22,11 +24,11 @@ class RecipesApi extends Api {
         return await this.get<Promise<Recipe[] | Recipe>>(`${this.baseUrl}?${queryParams}`);
     }
 
-    async createRecipe(data: CreateRecipeBody) {
+    async createRecipe(data: CreateUpdateRecipeBody) {
         return await this.post(`${this.baseUrl}`, data);
     }
 
-    async updateRecipe(id: string, data: Partial<Omit<Recipe, '_id' | 'createdAt' | 'liked'>>) {
+    async updateRecipe(id: string, data: Partial<Omit<Recipe, '_id' | 'createdAt'>>) {
         return await this.patch(`${this.baseUrl}/${id}`, data);
     }
 

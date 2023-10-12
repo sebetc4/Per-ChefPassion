@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "turbo run build --parallel",
-    "dev": "turbo run dev --parallel"
+    "dev": "turbo run dev --parallel",
+    "dev:front": "pnpm --filter front run dev",
+    "dev:api": "pnpm --filter api run dev",
+    "dev:ui": "pnpm --filter ui run dev",
+    "e2e": "pnpm --filter tests run e2e",
+    "build": "turbo run build --parallel"
   },
   "keywords": [],
   "author": "",

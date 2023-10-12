@@ -1,39 +1,33 @@
 // Styles
 import styles from './AdminRecipesForm.module.scss';
-// Librairies
-import * as yup from 'yup';
+// Libs
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { CreateUpdateRecipeBody } from 'types';
+import { createUpdateRecipeShema } from 'schemas';
 // App
 import { recipesApi } from '~/services';
-import { CreateRecipeBody, Path, Recipe } from '~/types';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Path } from '~/types';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { selectActiveRecipe } from '~/state';
 
 export default function AdminRecipesForm() {
-    const recipe = useLoaderData() as Recipe;
-    const navigate = useNavigate()
+    const { id } = useParams();
+    const recipe = useRecoilValue(selectActiveRecipe(id!));
+    const navigate = useNavigate();
 
     const defaultValues = {
         title: recipe?.title || '',
         image: recipe?.image || '',
     };
 
-    const recipeShema = yup.object({
-        title: yup
-            .string()
-            .required('Le titre est requis')
-            .min(10, 'Le titre doit contenir au moins 10 caractères')
-            .max(30, 'Le titre doit contenir au maximum 30 caractères'),
-
-        image: yup.string().required("L'image est requise").url("L'image doit être une URL valide"),
-    });
-
-    const submit = async (data: CreateRecipeBody) => {
+    const submit = async (data: CreateUpdateRecipeBody) => {
         clearErrors();
         try {
             if (recipe) {
                 await recipesApi.updateRecipe(recipe._id, data);
-                navigate(Path.ADMIN_RECIPES_LIST)
+                navigate(Path.ADMIN_RECIPES_LIST);
             } else {
                 await recipesApi.createRecipe(data);
                 reset(defaultValues);
@@ -49,13 +43,14 @@ export default function AdminRecipesForm() {
         handleSubmit,
         reset,
         clearErrors,
-    } = useForm({
+    } = useForm<CreateUpdateRecipeBody>({
         defaultValues,
-        resolver: yupResolver(recipeShema),
+        resolver: yupResolver(createUpdateRecipeShema),
+        mode: 'onTouched',
     });
 
     return (
-        <div className={styles.recipeFormContainer}>
+        <section className={styles.section}>
             <form
                 onSubmit={handleSubmit(submit)}
                 className={`${styles.recipeForm} card`}
@@ -84,6 +79,6 @@ export default function AdminRecipesForm() {
                     Sauvegarder
                 </button>
             </form>
-        </div>
+        </section>
     );
 }

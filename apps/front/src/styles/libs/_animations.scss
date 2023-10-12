@@ -3,3 +3,17 @@
         transform: rotate(360deg);
     }
 }
+
+@keyframes enter {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }  
+}
+
+@keyframes leave {
+    to {
+        opacity: 0;
+        transform: translateY(100%);
+    }  
+}

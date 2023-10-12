@@ -1,27 +1,17 @@
-import { useForm } from 'react-hook-form';
+// Styles
 import styles from './SignupPage.module.scss';
-import * as yup from 'yup';
-import { Path, SignupBody } from '~/types';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { usersApi } from '~/services';
+// Libs
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CreateUserBody } from 'types';
+import { signupSchema } from 'schemas';
+// App
+import { usersApi } from '~/services';
+import { Path } from '~/types';
 
 export default function SignupPage() {
     const navigate = useNavigate();
-
-    const validationSchema = yup.object({
-        username: yup
-            .string()
-            .required('Le pseudo est requis')
-            .min(3, 'Le pseudo doit contenir au moins 3 caractères')
-            .max(20, 'Le pseudo doit contenir au maximum 20 caractères'),
-        email: yup.string().required("L'email est requis").email("L'email n'est pas valide"),
-        password: yup
-            .string()
-            .required('Le mot de passe est requis')
-            .min(8, 'Le mot de passe doit contenir au moins 8 caractères')
-            .max(40, 'Le mot de passe doit contenir au maximum 40 caractères'),
-    });
 
     const initialValues = {
         username: '',
@@ -33,14 +23,14 @@ export default function SignupPage() {
         handleSubmit,
         register,
         formState: { errors, isSubmitting },
-    } = useForm({
+    } = useForm<CreateUserBody>({
         defaultValues: initialValues,
-        resolver: yupResolver(validationSchema),
+        resolver: yupResolver(signupSchema),
     });
 
-    const submit = async (data: SignupBody) => {
+    const submit = async (data: CreateUserBody) => {
         try {
-            await usersApi.signup(data);
+            await usersApi.createUser(data);
             navigate(Path.SIGNIN);
         } catch (err) {
             console.log(err);
@@ -52,9 +42,9 @@ export default function SignupPage() {
             <h1>Inscription</h1>
             <form
                 onSubmit={handleSubmit(submit)}
-                className={styles.form}
+                className={`${styles.form} card`}
             >
-                <div>
+                <div className={styles.form__field}>
                     <label htmlFor='username'>Pseudo</label>
                     <input
                         type='text'
@@ -62,7 +52,7 @@ export default function SignupPage() {
                     />
                     {errors.username && <p>{errors.username.message}</p>}
                 </div>
-                <div>
+                <div className={styles.form__field}>
                     <label htmlFor='email'>Email</label>
                     <input
                         type='email'
@@ -70,7 +60,7 @@ export default function SignupPage() {
                     />
                     {errors.email && <p>{errors.email.message}</p>}
                 </div>
-                <div>
+                <div className={styles.form__field}>
                     <label htmlFor='password'>Password</label>
                     <input
                         type='password'
